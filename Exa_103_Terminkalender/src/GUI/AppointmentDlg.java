@@ -1,5 +1,6 @@
 package GUI;
 
+import beans.Appointment;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,6 +10,21 @@ import javax.swing.JOptionPane;
 public class AppointmentDlg extends javax.swing.JDialog
 {
 
+  public Appointment app;
+  public boolean ok = false;
+
+  public AppointmentDlg(java.awt.Frame parent, boolean modal, Appointment appointment)
+  {
+    super(parent, modal);
+    initComponents();
+    this.app = appointment;
+    if (appointment != null)
+    {
+
+      tfText.setText(appointment.getText());
+      tfDatum.setText(appointment.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+    }
+  }
 
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,13 +83,43 @@ public class AppointmentDlg extends javax.swing.JDialog
   }// </editor-fold>//GEN-END:initComponents
 
     private void btUebernehmen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUebernehmen
+      try
+      {
+        LocalDateTime localDateTime = LocalDateTime.parse(tfDatum.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm"));
+        String text = tfText.getText();
+        if (text.isEmpty())
+        {
+          JOptionPane.showMessageDialog(this, "Bitte Zahlen eingeben");
+          return;
+        }
+        app = new Appointment(localDateTime, text);
 
+      }
+      catch (NumberFormatException ex)
+      {
+        JOptionPane.showMessageDialog(this, "Bitte Zahlen eingeben");
+      }
+      finally
+      {
+        ok = true;
+        dispose();
+      }
     }//GEN-LAST:event_btUebernehmen
 
     private void btAbbrechen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbbrechen
- 
+      ok = false;
+      dispose();
     }//GEN-LAST:event_btAbbrechen
+  public Appointment getAppointment()
+  {
+    return app;
 
+  }
+
+  public boolean isOk()
+  {
+    return ok;
+  }
 
   /**
    * @param args the command line arguments
@@ -114,18 +160,13 @@ public class AppointmentDlg extends javax.swing.JDialog
     }
     //</editor-fold>
     //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
 
     /* Create and display the dialog */
     java.awt.EventQueue.invokeLater(new Runnable()
     {
       public void run()
       {
+        AppointmentDlg dialog = new AppointmentDlg(new javax.swing.JFrame(), true, null);
         dialog.addWindowListener(new java.awt.event.WindowAdapter()
         {
           @Override

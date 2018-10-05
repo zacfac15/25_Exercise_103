@@ -12,6 +12,15 @@ import java.util.logging.Logger;
 public class AppointmentGUI extends javax.swing.JFrame
 {
 
+  AppointmentModell modell = new AppointmentModell();
+  
+  public AppointmentGUI()
+  {
+    initComponents();
+
+    initComponents();
+    ltListe.setModel(modell);
+  }
 
   /**
    * This method is called from within the constructor to initialize the form.
@@ -87,27 +96,61 @@ public class AppointmentGUI extends javax.swing.JFrame
 
   private void onHinzufügen(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onHinzufügen
   {//GEN-HEADEREND:event_onHinzufügen
-
+ AppointmentDlg dialog = new AppointmentDlg(this, true, null);
+    dialog.setVisible(true);
+    try
+    {
+      modell.addAppointment(dialog.getAppointment());
+    }
+    catch (Exception ex)
+    {
+      Logger.getLogger(AppointmentGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }//GEN-LAST:event_onHinzufügen
 
   private void onAendern(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onAendern
   {//GEN-HEADEREND:event_onAendern
-
+ int index = ltListe.getSelectedIndex();
+    AppointmentDlg dialog = new AppointmentDlg(this, true, modell.get(index));
+    dialog.setVisible(true);
+    modell.changeAppointment(dialog.getAppointment(), index);
   }//GEN-LAST:event_onAendern
 
   private void onLoeschen(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onLoeschen
   {//GEN-HEADEREND:event_onLoeschen
-
+ int indices[] = ltListe.getSelectedIndices();
+    modell.deleteAppointment(indices);
   }//GEN-LAST:event_onLoeschen
 
   private void onClose(java.awt.event.WindowEvent evt)//GEN-FIRST:event_onClose
   {//GEN-HEADEREND:event_onClose
-
+ try
+    {
+      modell.save();
+    }
+    catch (IOException ex)
+    {
+      ex.printStackTrace();
+    }
   }//GEN-LAST:event_onClose
 
   private void onOpen(java.awt.event.WindowEvent evt)//GEN-FIRST:event_onOpen
   {//GEN-HEADEREND:event_onOpen
-   
+     try
+    {
+      try
+      {
+        modell.load();
+      }
+      catch (ClassNotFoundException ex)
+      {
+        Logger.getLogger(AppointmentGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    catch (IOException ex)
+    {
+      ex.printStackTrace();
+    }
   }//GEN-LAST:event_onOpen
 
   /**
@@ -149,12 +192,6 @@ public class AppointmentGUI extends javax.swing.JFrame
     }
     //</editor-fold>
     //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
 
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable()
@@ -164,7 +201,7 @@ public class AppointmentGUI extends javax.swing.JFrame
         new AppointmentGUI().setVisible(true);
       }
     });
-  }
+  };
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JMenuItem aendern;
