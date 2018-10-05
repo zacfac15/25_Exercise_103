@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
-public class AppointmentDlg1 extends javax.swing.JDialog
+public class AppointmentDlg extends javax.swing.JDialog
 {
 
 
@@ -98,20 +98,24 @@ public class AppointmentDlg1 extends javax.swing.JDialog
     }
     catch (ClassNotFoundException ex)
     {
-      java.util.logging.Logger.getLogger(AppointmentDlg1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      java.util.logging.Logger.getLogger(AppointmentDlg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     catch (InstantiationException ex)
     {
-      java.util.logging.Logger.getLogger(AppointmentDlg1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      java.util.logging.Logger.getLogger(AppointmentDlg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     catch (IllegalAccessException ex)
     {
-      java.util.logging.Logger.getLogger(AppointmentDlg1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      java.util.logging.Logger.getLogger(AppointmentDlg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     catch (javax.swing.UnsupportedLookAndFeelException ex)
     {
-      java.util.logging.Logger.getLogger(AppointmentDlg1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      java.util.logging.Logger.getLogger(AppointmentDlg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
+    //</editor-fold>
     //</editor-fold>
     //</editor-fold>
     //</editor-fold>
