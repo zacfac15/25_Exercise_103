@@ -18,7 +18,7 @@ public class AppointmentModell extends AbstractListModel implements Serializable
   private final String FILE_PATH = System.getProperty("user.dir")
           + File.separator + "src"
           + File.separator + "res"
-          + File.separator + "termine.txt";
+          + File.separator + "termine.ser";
 
   public LinkedList<Appointment> list;
 
